@@ -1,0 +1,67 @@
+device sysfs mounted on /sys with fstype sysfs
+device proc mounted on /proc with fstype proc
+device udev mounted on /dev with fstype devtmpfs
+device devpts mounted on /dev/pts with fstype devpts
+device tmpfs mounted on /run with fstype tmpfs
+device /dev/mapper/ubuntu--vg-root mounted on / with fstype ext4
+device securityfs mounted on /sys/kernel/security with fstype securityfs
+device tmpfs mounted on /dev/shm with fstype tmpfs
+device tmpfs mounted on /run/lock with fstype tmpfs
+device tmpfs mounted on /sys/fs/cgroup with fstype tmpfs
+device cgroup mounted on /sys/fs/cgroup/systemd with fstype cgroup
+device pstore mounted on /sys/fs/pstore with fstype pstore
+device cgroup mounted on /sys/fs/cgroup/blkio with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/perf_event with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/devices with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/pids with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/net_cls,net_prio with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/cpu,cpuacct with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/cpuset with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/freezer with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/rdma with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/hugetlb with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/memory with fstype cgroup
+device systemd-1 mounted on /proc/sys/fs/binfmt_misc with fstype autofs
+device configfs mounted on /sys/kernel/config with fstype configfs
+device debugfs mounted on /sys/kernel/debug with fstype debugfs
+device fusectl mounted on /sys/fs/fuse/connections with fstype fusectl
+device hugetlbfs mounted on /dev/hugepages with fstype hugetlbfs
+device mqueue mounted on /dev/mqueue with fstype mqueue
+device sunrpc mounted on /run/rpc_pipefs with fstype rpc_pipefs
+device /dev/sdb1 mounted on /boot with fstype ext2
+device lxcfs mounted on /var/lib/lxcfs with fstype fuse.lxcfs
+device 192.168.0.1:/fatman mounted on /fatman with fstype nfs statvers=1.1
+	opts:	rw,vers=3,rsize=1048576,wsize=1048576,namlen=255,acregmin=3,acregmax=60,acdirmin=30,acdirmax=60,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.0.1,mountvers=3,mountport=33387,mountproto=tcp,local_lock=none
+	age:	273947
+	caps:	caps=0x3fcf,wtmult=4096,dtsize=4096,bsize=0,namlen=255
+	sec:	flavor=1,pseudoflavor=1
+	events:	35226 140 15 25146 81 14 344 66557294 0 1229 0 12802 74 0 43 31 0 43 0 0 66557294 3 0 0 0 0 0
+	bytes:	38241612325 215126364269 0 0 38346457088 215141003756 9361928 52530956
+	RPC iostats version: 1.0  p/v: 100003/3 (nfs)
+	xprt:	tcp 790 1 1 0 0 492577 492577 0 2357968 0 61 1682742 1865391
+	per-op statistics
+	        NULL: 0 0 0 0 0 0 0 0
+	     GETATTR: 35228 35228 0 4033004 3945536 10047 56839 68062
+	     SETATTR: 0 0 0 0 0 0 0 0
+	      LOOKUP: 14 14 0 2080 1624 0 664 665
+	      ACCESS: 22 22 0 2472 2640 0 2912 2913
+	    READLINK: 0 0 0 0 0 0 0 0
+	        READ: 36574 36574 0 4681472 38351138560 497 34868192 34869706
+	       WRITE: 211492 211492 0 215169785480 28762912 37911379 6008631 43923517
+	      CREATE: 11 11 0 2024 2992 0 11 11
+	       MKDIR: 0 0 0 0 0 0 0 0
+	     SYMLINK: 0 0 0 0 0 0 0 0
+	       MKNOD: 0 0 0 0 0 0 0 0
+	      REMOVE: 10 10 0 1472 1440 241 2683 2925
+	       RMDIR: 0 0 0 0 0 0 0 0
+	      RENAME: 3 3 0 624 780 0 366 367
+	        LINK: 0 0 0 0 0 0 0 0
+	     READDIR: 0 0 0 0 0 0 0 0
+	 READDIRPLUS: 19 19 0 2432 10436 0 2331 2333
+	      FSSTAT: 196525 196525 0 20438600 16508100 224891 555948 788662
+	      FSINFO: 2 2 0 200 160 0 0 0
+	    PATHCONF: 1 1 0 100 56 0 0 0
+	      COMMIT: 12663 12663 0 1620864 1620864 2630 456362 459232
+
+device tmpfs mounted on /run/user/0 with fstype tmpfs
+
