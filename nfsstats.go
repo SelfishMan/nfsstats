@@ -22,7 +22,7 @@ type Statistics struct {
     Age uint64
     Byte ByteCounters
     Event EventCounters
-    Operations []*OperationCounters
+    Operation map[string]*OperationCounters
     Transport TransportCounters
 }
 
@@ -98,7 +98,6 @@ type EventCounters struct {
 // Operation (linux/net/sunrpc/stats.c: rpc_count_iostats_metrics)
 // https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/net/sunrpc/stats.c#n149
 type OperationCounters struct {
-    Operation string
     Requests, Transmissions, Timeouts, BytesSent, BytesReceived, TotalQueueTime,
     TotalResponseTime, TotalExecutionTime uint64
 }
@@ -163,8 +162,14 @@ func Parse(reader io.Reader) ([]*NFSMount, error) {
     return nfsMounts, scanner.Err()
 }
 
+func NewStatistics() *Statistics {
+    var statistics Statistics
+    statistics.Operation = make(map[string]*OperationCounters)
+    return &statistics
+}
+
 func parseStatistics(scanner *bufio.Scanner) (*Statistics, error) {
-    statistics := &Statistics{}
+    statistics := NewStatistics()
 
     // Extract each metric type
     for scanner.Scan() {
@@ -266,19 +271,16 @@ func parseStatistics(scanner *bufio.Scanner) (*Statistics, error) {
     }
 
     // Extract per-operation stats
-    r, err := parseOperations(scanner)
-    if err != nil {
+    parseOperations(scanner, statistics)
+    if err := scanner.Err(); err != nil {
         return nil, err
     }
-    statistics.Operations = r
 
     // We're done here
     return statistics, nil
 }
 
-func parseOperations(scanner *bufio.Scanner) ([]*OperationCounters, error) {
-    var operations []*OperationCounters
-
+func parseOperations(scanner *bufio.Scanner, statistics *Statistics) () {
     // Extract each metric type
     for scanner.Scan() {
         // Split each line on spaces
@@ -289,9 +291,10 @@ func parseOperations(scanner *bufio.Scanner) ([]*OperationCounters, error) {
         if len(fields) != 9 { continue }
 
         // Store the values
+        opName := strings.TrimSuffix(fields[0], ":")
+
         elements := makeUint64(fields[1:])
-        operation := &OperationCounters {
-            Operation: strings.TrimSuffix(fields[0], ":"),
+        statistics.Operation[opName] = &OperationCounters {
             Requests: elements[0],
             Transmissions: elements[1],
             Timeouts: elements[2],
@@ -301,12 +304,9 @@ func parseOperations(scanner *bufio.Scanner) ([]*OperationCounters, error) {
             TotalResponseTime: elements[6],
             TotalExecutionTime: elements[7],
         }
-
-        // Add it to the pile
-        operations = append(operations, operation)
     }
 
-    return operations, scanner.Err()
+    return
 }
 
 func makeUint64(fields []string) []uint64 {
