@@ -159,7 +159,7 @@ func Parse(reader io.Reader) ([]*NFSMount, error) {
         }
     }
 
-    return nfsMounts, scanner.Err()
+    return nfsMounts, nil
 }
 
 func NewStatistics() *Statistics {
